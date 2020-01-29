@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 /**
  * Scan a directory and find large files.
  * @author      Michael Snoeren <michael@r2h.nl>
@@ -77,7 +78,7 @@ foreach ($iterator as $file) {
     try {
         $fileSize = $file->getSize();
         if ($fileSize >= $size) {
-            $largeFiles[makeRelativePath($file)] = number_format($fileSize / 1024 / 1024, 2) . 'mb';
+            $largeFiles[makeRelativePath($file->getRealPath())] = number_format($fileSize / 1024 / 1024, 2) . 'mb';
         }
     } catch (\Exception $e) {
     }
